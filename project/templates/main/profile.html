@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div>
+    <h1>Profile</h1>
+    <p><strong>Example userID: </strong>{{ example_id }}</p>
+    <p><strong>Corbado userID: </strong>{{ corbado_id }}</p>
+    <h2>Your Identifiers</h2>
+    <div id="identifier-list">
+        {% for identifier in identifiers %}
+        <div>
+            <p>
+                <strong>Type</strong>: {{ identifier.type.value }}
+            </p>
+            <p>
+                <strong>Value</strong>: {{ identifier.value }}
+            </p>
+        </div>
+        {% endfor %}
+    </div>
+    <h2>Manage your Passkeys</h2>
+    <div id="passkeylist-container"></div>
+</div>
+<script>
+    window.corbadoLoadPromise.then(() => {
+        Corbado.mountPasskeyListUI(document.getElementById("passkeylist-container"));
+    });
+</script>
+{% endblock %}

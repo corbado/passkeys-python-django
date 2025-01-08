@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div>
+    <h1>Login</h1>
+    <div id="login-container"></div>
+</div>
+<script>
+    window.corbadoLoadPromise.then(() => {
+        const loginContainer = document.getElementById("login-container");
+        Corbado.mountAuthUI(loginContainer, {
+            onLoggedIn: () => {
+                window.location.href = "/signup/onboarding";
+            },
+            initialBlock: "login-init"
+        });
+    });
+</script>
+{% endblock %}

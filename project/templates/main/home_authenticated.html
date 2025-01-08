@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div>
+    <h1>Welcome {{full_name}} from {{city}}!</h1>
+    <p>You now have access to everything and can visit the user area:</p>
+    <a class="button" href="/userarea">User area</a>
+</div>
+<script>
+    window.corbadoLoadPromise.then(() => {
+        document.getElementById("name-placeholder").innerText = Corbado.user.name;
+    });
+</script>
+{% endblock %}
