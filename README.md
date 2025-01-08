@@ -1,12 +1,12 @@
 <img width="1070" alt="GitHub Repo Cover" src="https://github.com/corbado/corbado-php/assets/18458907/aa4f9df6-980b-4b24-bb2f-d71c0f480971">
 
-# Django Passkey Example App
+# Python Django Passkeys Example Application
 
-This is a sample implementation of
-the [Corbado web-js](https://github.com/corbado/javascript/tree/develop/packages/web-js) package
-and [Corbado Python](https://github.com/corbado/corbado-python)
-SDK being integrated into a web
-application built with Django.
+This is a sample implementation of the [Corbado passkeys-first authentication solution](https://www.corbado.com) using
+Python with Django. The following packages are being used:
+
+- [Corbado web-js](https://github.com/corbado/javascript/tree/develop/packages/web-js) 
+- [Corbado Python](https://github.com/corbado/corbado-python)
 
 ## File structure
 
@@ -36,7 +36,7 @@ You need to have [Python](https://www.python.org/downloads/) and `pip` installed
 
 ### Configure environment variables
 
-Use the values you obtained in [Prerequisites](#prerequisites) to configure the following variables inside an `.env`
+Use the values you obtained in [Prerequisites](#prerequisites) to configure the following variables inside a `.env`
 file you create in the root folder of this project:
 
 ```sh
@@ -90,3 +90,9 @@ Now you can start the server by running
 ```bash
 python manage.py runserver 3000
 ```
+
+## Passkeys support
+
+- Community for Developer Support: https://bit.ly/passkeys-community
+- Passkeys Debugger: https://www.passkeys-debugger.io/
+- Passkey Subreddit: https://www.reddit.com/r/passkey/
