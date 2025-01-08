@@ -1,0 +1,1 @@
+# js-vanillajs-python-django
