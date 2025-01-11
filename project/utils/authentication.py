@@ -1,7 +1,7 @@
-from corbado_python_sdk import Config, CorbadoSDK, SessionValidationResult
 from corbado_python_sdk.generated.models import IdentifierList
 from django.conf import settings
 from django.http import HttpRequest
+from corbado_python_sdk import Config, CorbadoSDK, SessionValidationResult
 
 config = Config(
     project_id=settings.CORBADO_PROJECT_ID,
@@ -25,6 +25,8 @@ def get_authenticated_user_from_authorization_header(req: HttpRequest) -> Sessio
         return None
     session_token = session_token.replace('Bearer ', '')
     return sdk.sessions.get_and_validate_short_session_value(session_token)
+
+
 
 def get_user_identifiers(user_id: str) -> IdentifierList:
     return sdk.identifiers.list_identifiers(user_id=user_id)

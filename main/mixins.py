@@ -1,10 +1,9 @@
 from django.contrib.auth.mixins import AccessMixin
 from django.shortcuts import redirect
 
-
 class LoginRequiredMixin(AccessMixin):
     """Mixin that verifies that the current user is authenticated.
-    Expects the user to be set by custom middleware (e.g., `request.corbado_user`).
+    Expects the user to be set by custom middleware (`request.corbado_user`).
     """
 
     def dispatch(self, request, *args, **kwargs):

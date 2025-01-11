@@ -20,10 +20,10 @@
     </div>
     <h2>Manage your Passkeys</h2>
     <div id="passkeylist-container"></div>
+    <script>
+        window.corbadoLoadPromise.then(() => {
+            Corbado.mountPasskeyListUI(document.getElementById("passkeylist-container"));
+        });
+    </script>
 </div>
-<script>
-    window.corbadoLoadPromise.then(() => {
-        Corbado.mountPasskeyListUI(document.getElementById("passkeylist-container"));
-    });
-</script>
 {% endblock %}

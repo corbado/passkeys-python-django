@@ -6,6 +6,7 @@ from .mixins import LoginRequiredMixin
 from django.http import JsonResponse
 from project.utils.authentication import get_user_identifiers
 
+
 # Create your views here.
 
 class Home(View):
@@ -14,7 +15,7 @@ class Home(View):
             user = User.objects.get(corbado_user_id=request.corbado_user.user_id)
             return render(
                 request, 'main/home_authenticated.html',
-                {'city': user.city, 'full_name': request.corbado_user.full_name}
+                {'city': user.city}
             )
         return render(request, 'main/home_guest.html')
 
@@ -47,6 +48,13 @@ class Login(View):
         return render(request, 'main/login.html')
 
 
+class UserArea(View):
+    def get(self, request):
+        if request.corbado_user:
+            return render(request, 'main/userarea_authenticated.html')
+        return render(request, 'main/userarea_guest.html')
+
+
 class Profile(LoginRequiredMixin, View):
     def get(self, request):
         user = User.objects.get(corbado_user_id=request.corbado_user.user_id)
@@ -55,14 +63,6 @@ class Profile(LoginRequiredMixin, View):
             request, 'main/profile.html',
             {'example_id': user.id, 'corbado_id': user.corbado_user_id, 'identifiers': identifiers.identifiers}
         )
-
-
-class UserArea(View):
-    def get(self, request):
-        if request.corbado_user:
-            return render(request, 'main/userarea_authenticated.html')
-        return render(request, 'main/userarea_guest.html')
-
 
 @api_login_required
 def secret_view(request):

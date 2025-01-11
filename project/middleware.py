@@ -1,7 +1,6 @@
-from django.utils.deprecation import MiddlewareMixin
 from .utils.authentication import get_authenticated_user_from_cookie, get_authenticated_user_from_authorization_header
 from dataclasses import dataclass
-
+from django.utils.deprecation import MiddlewareMixin
 
 @dataclass(frozen=True)
 class CorbadoUser:

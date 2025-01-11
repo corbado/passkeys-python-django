@@ -1,6 +1,7 @@
 from django.conf import settings
 
 
+# scs name:
 def corbado_settings(request):
     return {
         'CORBADO_PROJECT_ID': settings.CORBADO_PROJECT_ID,
