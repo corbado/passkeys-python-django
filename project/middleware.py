@@ -14,5 +14,5 @@ class CorbadoAuthenticationMiddleware(MiddlewareMixin):
         validation_result = get_authenticated_user_from_cookie(request)
         if not validation_result:
             validation_result = get_authenticated_user_from_authorization_header(request)
-        if validation_result and validation_result.authenticated:
+        if validation_result:
             request.corbado_user = CorbadoUser(user_id=validation_result.user_id, full_name=validation_result.full_name)

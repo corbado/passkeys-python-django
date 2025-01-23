@@ -14,13 +14,16 @@ from pathlib import Path
 import os
 import environ
 
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Initialize environment variables
 env = environ.Env(
     # set casting and default values
-    DEBUG=(bool, False)
+    DEBUG=(bool, DEBUG)
 )
 
 # Take environment variables from .env file
@@ -37,9 +40,6 @@ CORBADO_BACKEND_API = env('CORBADO_BACKEND_API')
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-uqjk#s7p6i81e-9(j_0!vm55y4$+_ga=pi3i$9g8_wohpm)_lp'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
 ALLOWED_HOSTS = []
 
