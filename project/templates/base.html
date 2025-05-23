@@ -3,6 +3,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en  ">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,7 +17,8 @@
 
     <!-- Corbado web-js -->
     <link rel="stylesheet" href="https://unpkg.com/@corbado/web-js@3/dist/bundle/index.css" />
-    <script src="https://unpkg.com/@corbado/web-js@3.0.0/dist/bundle/index.js"></script>
+    <script src="https://unpkg.com/@corbado/web-js@3.1.0/dist/bundle/index.js"></script>
+    <script src="https://unpkg.com/@corbado/shared-util@1/dist/bundle/index.js"></script>
 
     <!-- Corbado Initialization Script -->
     <script>
@@ -58,81 +60,95 @@
             }
         });
     </script>
+
+    <script>
+        CorbadoSharedUtil.sendEvent({
+            type: CorbadoSharedUtil.TelemetryEventType.EXAMPLE_APPLICATION_OPENED,
+            payload: {
+                exampleName: 'corbado/js-vanillajs-python-django',
+            },
+            sdkVersion: '3.1.0',
+            sdkName: 'Javascript SDK',
+            identifier: "{{ CORBADO_PROJECT_ID }}",
+        });
+    </script>
 </head>
+
 <body>
-<div>
-    <nav>
-        <a href="{% url 'home' %}">
-            <img src="{% static 'images/logo.svg' %}" alt="Corbado Logo" height="40" width="40" />
-            <p>Corbado Example</p>
-        </a>
-        <ul>
-            <li>
-                <a href="{% url 'home' %}"
-                   data-selected="{% if request.path == '/' %}true{% else %}false{% endif %}">
-                    Home
-                </a>
-            </li>
-            <li>
-                <a href="{% url 'user_area' %}"
-                   data-selected="{% if request.path == '/userarea/' %}true{% else %}false{% endif %}">
-                    User area
-                </a>
-            </li>
-            {% if corbado_user is None %}
-            <li>
-                <a href="{% url 'signup' %}"
-                   data-selected="{% if request.path == '/signup/' %}true{% else %}false{% endif %}">
-                    Sign Up
-                </a>
-            </li>
-            <li>
-                <a href="{% url 'login' %}"
-                   data-selected="{% if request.path == '/login/' %}true{% else %}false{% endif %}">
-                    Login
-                </a>
-            </li>
-            {% else %}
-            <li>
-                <a href="{% url 'profile' %}"
-                   data-selected="{% if request.path == '/profile/' %}true{% else %}false{% endif %}">
-                    Profile
-                </a>
-            </li>
+    <div>
+        <nav>
+            <a href="{% url 'home' %}">
+                <img src="{% static 'images/logo.svg' %}" alt="Corbado Logo" height="40" width="40" />
+                <p>Corbado Example</p>
+            </a>
+            <ul>
+                <li>
+                    <a href="{% url 'home' %}"
+                        data-selected="{% if request.path == '/' %}true{% else %}false{% endif %}">
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'user_area' %}"
+                        data-selected="{% if request.path == '/userarea/' %}true{% else %}false{% endif %}">
+                        User area
+                    </a>
+                </li>
+                {% if corbado_user is None %}
+                <li>
+                    <a href="{% url 'signup' %}"
+                        data-selected="{% if request.path == '/signup/' %}true{% else %}false{% endif %}">
+                        Sign Up
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'login' %}"
+                        data-selected="{% if request.path == '/login/' %}true{% else %}false{% endif %}">
+                        Login
+                    </a>
+                </li>
+                {% else %}
+                <li>
+                    <a href="{% url 'profile' %}"
+                        data-selected="{% if request.path == '/profile/' %}true{% else %}false{% endif %}">
+                        Profile
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+            {% if corbado_user %}
+            <button id="logout">Logout</button>
             {% endif %}
-        </ul>
-        {% if corbado_user %}
-        <button id="logout">Logout</button>
-        {% endif %}
-    </nav>
-</div>
+        </nav>
+    </div>
 
-<main>
-    <section>
-        {% block content %}
-        <!-- Page-specific content will be injected here -->
-        {% endblock %}
-    </section>
-    <footer>
-        <a href="https://github.com/corbado/passkeys-python-django" target="_blank">
-            <img src="{% static 'images/github-icon.svg' %}" alt="GitHub icon" width="24" height="24" />
-            Github
-        </a>
-        <a href="https://docs.corbado.com/corbado-complete/frontend-integration/vanilla-js" target="_blank">
-            <img src="{% static 'images/documents-icon.svg' %}" alt="Documentation icon" width="24" height="24" />
-            Documentation
-        </a>
-    </footer>
-</main>
+    <main>
+        <section>
+            {% block content %}
+            <!-- Page-specific content will be injected here -->
+            {% endblock %}
+        </section>
+        <footer>
+            <a href="https://github.com/corbado/passkeys-python-django" target="_blank">
+                <img src="{% static 'images/github-icon.svg' %}" alt="GitHub icon" width="24" height="24" />
+                Github
+            </a>
+            <a href="https://docs.corbado.com/corbado-complete/frontend-integration/vanilla-js" target="_blank">
+                <img src="{% static 'images/documents-icon.svg' %}" alt="Documentation icon" width="24" height="24" />
+                Documentation
+            </a>
+        </footer>
+    </main>
 
-{% if corbado_user %}
-<script>
-    document.getElementById("logout").addEventListener("click", async function() {
-        await window.corbadoLoadPromise;
-        await Corbado.logout();
-        window.location.href = "/";
-    });
-</script>
-{% endif %}
+    {% if corbado_user %}
+    <script>
+        document.getElementById("logout").addEventListener("click", async function () {
+            await window.corbadoLoadPromise;
+            await Corbado.logout();
+            window.location.href = "/";
+        });
+    </script>
+    {% endif %}
 </body>
+
 </html>
