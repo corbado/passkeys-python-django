@@ -17,7 +17,7 @@
 
     <!-- Corbado web-js -->
     <link rel="stylesheet" href="https://unpkg.com/@corbado/web-js@3/dist/bundle/index.css" />
-    <script src="https://unpkg.com/@corbado/web-js@3.1.0/dist/bundle/index.js"></script>
+    <script src="https://unpkg.com/@corbado/web-js@3.1.1/dist/bundle/index.js"></script>
     <script src="https://unpkg.com/@corbado/shared-util@1/dist/bundle/index.js"></script>
 
     <!-- Corbado Initialization Script -->
@@ -57,20 +57,23 @@
                         field_status: "Status of Passkey: "
                     }
                 }
-            }
-        });
+            },
+        }, {{ CORBADO_TELEMETRY_DISABLED }} !== true);
     </script>
 
     <script>
-        CorbadoSharedUtil.sendEvent({
-            type: CorbadoSharedUtil.TelemetryEventType.EXAMPLE_APPLICATION_OPENED,
-            payload: {
-                exampleName: 'corbado/js-vanillajs-python-django',
-            },
-            sdkVersion: '3.1.0',
-            sdkName: 'Javascript SDK',
-            identifier: "{{ CORBADO_PROJECT_ID }}",
-        });
+        if ({{ CORBADO_TELEMETRY_DISABLED }} !== true) {
+
+            CorbadoSharedUtil.sendEvent({
+                type: CorbadoSharedUtil.TelemetryEventType.EXAMPLE_APPLICATION_OPENED,
+                payload: {
+                    exampleName: 'corbado/js-vanillajs-python-django',
+                },
+                sdkVersion: '3.1.0',
+                sdkName: 'React SDK',
+                identifier: "{{ CORBADO_PROJECT_ID }}",
+            });
+        }
     </script>
 </head>
 

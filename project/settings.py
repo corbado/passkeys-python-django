@@ -21,10 +21,7 @@ DEBUG = True
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Initialize environment variables
-env = environ.Env(
-    # set casting and default values
-    DEBUG=(bool, DEBUG)
-)
+env = environ.Env()
 
 # Take environment variables from .env file
 environ.Env.read_env(env_file=BASE_DIR / '.env')
@@ -34,6 +31,7 @@ CORBADO_PROJECT_ID = env('CORBADO_PROJECT_ID')
 CORBADO_API_SECRET = env('CORBADO_API_SECRET')
 CORBADO_FRONTEND_API = env('CORBADO_FRONTEND_API')
 CORBADO_BACKEND_API = env('CORBADO_BACKEND_API')
+CORBADO_TELEMETRY_DISABLED = env.str('CORBADO_TELEMETRY_DISABLED', 'false')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
