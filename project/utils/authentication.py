@@ -27,6 +27,7 @@ def get_authenticated_user_from_authorization_header(req: HttpRequest) -> UserEn
     session_token = req.headers.get('Authorization')
     if not session_token:
         return None
+    session_token = session_token.removeprefix("Bearer ")
     try:
         return sdk.sessions.validate_token(session_token)
     except:
